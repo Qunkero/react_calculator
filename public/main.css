@@ -53,6 +53,7 @@ body {
 }
 
 button {
+    font-family: 'Orbitron', sans-serif;
     border-radius: 8px;
     border: none;
     background-color: #3a3a3a;
@@ -79,13 +80,13 @@ button:active {
 
 #equalButton {
     position: absolute;
-    margin-left: 12px;
+    margin-left: 8px;
     margin-top: -50px;
     height: 90px;
 }
 
 #zeroButton {
-    width: 117px;
+    width: 122px;
 }
 
 .red {
