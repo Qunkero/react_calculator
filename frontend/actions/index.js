@@ -1,27 +1,11 @@
 import * as types from '../constants/ActionTypes'
-export const addNumber  = {
-    type: types.ADD
-};
 
-export const divisionNumber = {
-    type: types.DIVISION
-};
+export const addNumber  = () => ({ type: types.ADD});
 
-export const multiplyNumber = {
-    type: types.MULTIPLY
-};
+export const divisionNumber = ()=>({type: types.DIVISION});
 
-export const substractionNumber = {
-    type: types.SUBTRACTION
-};
+export const multiplyNumber =()=>({type: types.MULTIPLY});
 
-export const getResult = {
-    type: types.GET_RESULT
-};
+export const subtractionNumber = ()=>({type: types.SUBTRACTION});
 
-export const setEntryBox = (element)=> {
-    return {
-        type: types.SET_ENTRY_BOX,
-        number: element
-    }
-};
+export const setEntryBox = (element)=> ({ type: types.SET_ENTRY_BOX, number: element });

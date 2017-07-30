@@ -5,10 +5,10 @@ export default class Footer extends Component {
         return(
             <div id='entrybox' className='text-right'>
                 <div id='entry'>
-                    <p id='answer'>0</p>
+                    <p id='answer'>{this.props.entryBox}</p>
                 </div>
                 <div id='history'>
-                    <p>0</p>
+                    <p>{this.props.history}</p>
                 </div>
             </div>
         )

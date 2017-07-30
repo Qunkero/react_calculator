@@ -22,7 +22,7 @@ describe('calculator reducer test',() =>{
 
     });
 
-    it('should set_ENTRY_BOX', ()=>{
+    it.only('should set_ENTRY_BOX', ()=>{
 
         expect(
             reducer(initialState, action.setEntryBox(5))
@@ -78,7 +78,7 @@ describe('calculator reducer test',() =>{
                 history: '',
                 prevAction: types.SET_ENTRY_BOX,
                 prevHistory: '' // history + entryBox
-            }, action.addNumber)
+            }, action.addNumber())
         ).toEqual({
             sum: 5,
             actionForUse: types.ADD,
@@ -114,7 +114,7 @@ describe('calculator reducer test',() =>{
                 history: '5 +',
                 prevAction: types.SET_ENTRY_BOX,
                 prevHistory: '5' // history + entryBox
-            }, action.addNumber)
+            }, action.addNumber())
         ).toEqual({
             sum: 11,
             actionForUse: types.ADD,
@@ -137,7 +137,7 @@ describe('calculator reducer test',() =>{
                 history: '5 + 6 +',
                 prevAction: types.ADD,
                 prevHistory: '5 + 6' // history + entryBox
-            }, action.substractionNumber)
+            }, action.subtractionNumber())
         ).toEqual({
             sum: 11,
             actionForUse: types.SUBTRACTION,
@@ -158,7 +158,7 @@ describe('calculator reducer test',() =>{
                 history: '5 + 6 -',
                 prevAction: types.SUBTRACTION,
                 prevHistory: '5 + 6' // history + entryBox
-            }, action.substractionNumber)
+            }, action.subtractionNumber())
 
         ).toEqual({
             sum: 11,
@@ -181,7 +181,7 @@ describe('calculator reducer test',() =>{
                 history: '',
                 prevAction: types.SET_ENTRY_BOX,
                 prevHistory: '' // history + entryBox
-            }, action.substractionNumber)
+            }, action.subtractionNumber())
         ).toEqual({
             sum: 5,
             actionForUse: types.SUBTRACTION,
@@ -218,7 +218,7 @@ describe('calculator reducer test',() =>{
                 history: '5 -',
                 prevAction: types.SET_ENTRY_BOX,
                 prevHistory: '5' // history + entryBox
-            }, action.addNumber)
+            }, action.addNumber())
         ).toEqual({
             sum: -1,
             actionForUse: types.ADD,
@@ -227,5 +227,43 @@ describe('calculator reducer test',() =>{
             prevAction: types.ADD,
             prevHistory: '5 - 6' // history + entryBox
         });
+    })
+
+    it('sum big number', ()=>{
+        expect(
+            reducer({
+                actionForUse: "ADD",
+                entryBox: "11",
+                history: "11 +",
+                prevAction: "ADD",
+                prevHistory: "11",
+                sum: 11
+            }, action.setEntryBox(4))
+        ).toEqual({
+            actionForUse: "ADD",
+            entryBox: "4",
+            history: "11 +",
+            prevAction: types.SET_ENTRY_BOX,
+            prevHistory: "11",
+            sum: 15
+        });
+
+        expect(
+            reducer({
+                actionForUse: "ADD",
+                entryBox: "4",
+                history: "11 +",
+                prevAction: types.SET_ENTRY_BOX,
+                prevHistory: "11",
+                sum: 15
+            }, action.setEntryBox(4))
+        ).toEqual({
+            actionForUse: "ADD",
+            entryBox: "44",
+            history: "11 +",
+            prevAction: types.SET_ENTRY_BOX,
+            prevHistory: "11",
+            sum: 55
+        })
     })
 });
