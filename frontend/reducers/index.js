@@ -1,7 +1,6 @@
 import * as types from '../constants/ActionTypes';
 
 const initialState = {
-    symbol: '',
     prevAction: '',
     sum: 0,
     entryBox: 0,
@@ -38,17 +37,24 @@ export default function (state = initialState, action) {
 
         case types.ADD:
 
-
-
             return {
                 ...state,
-                symbol: '+',
-                lastSymbol: types.ADD,
                 sum: state.sum + Number(state.entryBox),
                 entryBox: String(state.sum + Number(state.entryBox)),
                 prevHistory: history +  state.entryBox,
                 history: history + state.entryBox + " " + '+',
                 prevAction: types.ADD
+            };
+
+        case types.SUBTRACTION:
+
+            return {
+                ...state,
+                sum: state.sum + Number(state.entryBox),
+                entryBox: String(state.sum + Number(state.entryBox)),
+                prevHistory: history +  state.entryBox,
+                history: history + state.entryBox + " " + '+',
+                prevAction: types.SUBTRACTION
             };
 
 
