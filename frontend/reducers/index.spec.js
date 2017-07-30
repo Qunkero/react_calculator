@@ -52,7 +52,7 @@ describe('calculator reducer test',() =>{
 
     });
 
-    it('users steps', ()=>{
+    it('identical actions', ()=>{
 
         expect(
             reducer({
@@ -125,4 +125,47 @@ describe('calculator reducer test',() =>{
         });
     })
 
+    it('different action', ()=>{
+
+        // 5 + 6 -
+
+        expect(
+            reducer({
+                sum: 5,
+                actionForUse: types.ADD,
+                entryBox: '6',
+                history: '5 +', // history + entryBox + types.ADD
+                prevHistory: '5',
+                prevAction: types.SET_ENTRY_BOX
+            }, action.substractionNumber)
+
+        ).toEqual({
+            sum: 11,
+            actionForUse: types.ADD,
+            entryBox: '11',
+            history: '5 + 6 -',
+            prevHistory: '5 + 6',
+            prevAction: types.SUBTRACTION
+        });
+
+
+    });
+
+    it('negative compute', ()=>{
+        expect(
+            reducer({
+                sum: 0,
+                entryBox: '5',
+                history: '', // 5 + add
+                prevHistory: '', // 5 + symbol
+                prevAction: types.SET_ENTRY_BOX
+            }, action.substractionNumber)
+        ).toEqual({
+            sum: 5,
+            entryBox: '5',
+            history: '5 +',
+            prevAction: types.ADD,
+            prevHistory: '5' // history + entryBox
+        });
+    })
 });

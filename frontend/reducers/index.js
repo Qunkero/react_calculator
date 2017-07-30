@@ -23,6 +23,8 @@ function addStringElement(a, b, prevAction) {
 export default function (state = initialState, action) {
 
     const history = state.history ? state.history + ' ' : state.history;
+    const prevSetEntryBox = state.prevAction === types.SET_ENTRY_BOX,
+        prevHistory = prevSetEntryBox ? history + state.entryBox : state.prevHistory;
 
     switch (action.type) {
 
@@ -31,7 +33,7 @@ export default function (state = initialState, action) {
         case types.SET_ENTRY_BOX:
             return {
                 ...state,
-                entryBox: addStringElement(state.entryBox, action.number, state.prevAction === types.SET_ENTRY_BOX),
+                entryBox: addStringElement(state.entryBox, action.number, prevSetEntryBox),
                 prevAction: types.SET_ENTRY_BOX
             };
 
@@ -39,10 +41,10 @@ export default function (state = initialState, action) {
 
             return {
                 ...state,
-                sum: state.sum + Number(state.entryBox),
-                entryBox: String(state.sum + Number(state.entryBox)),
-                prevHistory: history +  state.entryBox,
-                history: history + state.entryBox + " " + '+',
+                sum: prevSetEntryBox ? state.sum + Number(state.entryBox) : state.sum,
+                entryBox: prevSetEntryBox ? String(state.sum + Number(state.entryBox)) : state.entryBox,
+                prevHistory: prevHistory,
+                history: prevSetEntryBox ? history + state.entryBox + " " + '+' : state.prevAction + " " + "+",
                 prevAction: types.ADD
             };
 
@@ -50,10 +52,10 @@ export default function (state = initialState, action) {
 
             return {
                 ...state,
-                sum: state.sum + Number(state.entryBox),
-                entryBox: String(state.sum + Number(state.entryBox)),
-                prevHistory: history +  state.entryBox,
-                history: history + state.entryBox + " " + '+',
+                sum: prevSetEntryBox ? state.sum - Number(state.entryBox) : state.sum,
+                entryBox: prevSetEntryBox ? String(state.sum - Number(state.entryBox)) : state.entryBox,
+                prevHistory: prevHistory,
+                history: prevSetEntryBox ? history + state.entryBox + " " + '-': state.prevHistory + " " + "-",
                 prevAction: types.SUBTRACTION
             };
 
