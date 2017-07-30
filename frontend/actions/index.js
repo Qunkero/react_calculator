@@ -11,7 +11,7 @@ export const multiplyNumber = {
     type: types.MULTIPLY
 };
 
-export const substraction = {
+export const substractionNumber = {
     type: types.SUBTRACTION
 };
 
@@ -19,9 +19,9 @@ export const getResult = {
     type: types.GET_RESULT
 };
 
-export const setElement = (element)=> {
+export const setEntryBox = (element)=> {
     return {
-        type: types.SET_ELEMENT,
-        element: element
+        type: types.SET_ENTRY_BOX,
+        number: element
     }
 };

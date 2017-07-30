@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:watch": "npm test -- --watch",
+    "test:watch": "jest --watch",
     "start": "webpack-dev-server --inline --hot"
   },
   "author": "",
