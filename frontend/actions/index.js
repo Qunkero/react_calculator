@@ -2,6 +2,8 @@ import * as types from '../constants/ActionTypes'
 
 export const addNumber  = () => ({ type: types.ADD});
 
+export const allClean  = () => ({ type: types.ALL_CLEAN});
+
 export const divisionNumber = ()=>({type: types.DIVISION});
 
 export const multiplyNumber =()=>({type: types.MULTIPLY});

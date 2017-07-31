@@ -30,6 +30,18 @@ function computeSum(action, prevSum, entryBox) {
     }
 }
 
+function computeSumWhenSetEntryBoxTwice(entryBox, prevHistory) {
+    if (!prevHistory) {
+        return entryBox;
+    } else if(Number(prevHistory)) {
+        return entryBox + Number(prevHistory);
+    } else {
+        return prevHistory.split('').reduce((prev, item)=>{
+           return Number(item) ? Number(item) + prev : prev;
+        }, entryBox);
+    }
+}
+
 
 export default function (state = initialState, action) {
 
@@ -41,12 +53,14 @@ export default function (state = initialState, action) {
     switch (action.type) {
 
 
-
         case types.SET_ENTRY_BOX:
-            const entryBox = addStringElement(state.entryBox, action.number, prevSetEntryBox);
+            const entryBox = addStringElement(state.entryBox, action.number, prevSetEntryBox),
+                sum = !state.actionForUse ? Number(entryBox) :
+                    prevSetEntryBox ? computeSumWhenSetEntryBoxTwice(Number(entryBox), state.prevHistory) :
+                        computeSum(state.actionForUse, state.sum, action.number);
             return {
                 ...state,
-                sum: state.actionForUse ? computeSum(state.actionForUse, state.sum, action.number) : Number(entryBox),
+                sum: sum,
                 entryBox: entryBox,
                 prevAction: types.SET_ENTRY_BOX
             };
@@ -63,7 +77,6 @@ export default function (state = initialState, action) {
             };
 
         case types.SUBTRACTION:
-
             return {
                 ...state,
                 actionForUse: types.SUBTRACTION,
@@ -73,7 +86,8 @@ export default function (state = initialState, action) {
                 prevAction: types.SUBTRACTION
             };
 
-
+        case types.ALL_CLEAN:
+            return initialState;
 
         default:
             return state
