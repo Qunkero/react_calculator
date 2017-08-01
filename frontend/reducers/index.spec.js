@@ -153,7 +153,7 @@ describe('calculator reducer test',() =>{
 
     });
 
-    it.only('should change history if we change type Action', ()=>{
+    it('should change history if we change type Action', ()=>{
         expect(
             reducer({
                 prevSum:5,
@@ -345,5 +345,49 @@ describe('calculator reducer test',() =>{
             sum: 74
         });
 
-    })
+    });
+
+    it('compute result', ()=>{
+        expect(
+            reducer({
+                actionForUse:"ADD",
+                entryBox:"55",
+                history: "55 +",
+                prevAction: "SET_ENTRY_BOX",
+                prevHistory: "55",
+                prevSum: 55,
+                sum: 110
+            }, action.getResult())
+        ).toEqual({
+            actionForUse: "",
+            entryBox: "110",
+            history: "",
+            prevAction:"",
+            prevHistory:"110",
+            prevSum: 0,
+            sum: 110
+        });
+    });
+
+    it('correct history after pressing of =', ()=>{
+        expect(
+            reducer({
+                actionForUse: '',
+                prevAction: '',
+                prevSum: 0,
+                sum: 55,
+                entryBox: 55,
+                history: '',
+                prevHistory: '55'
+            }, action.addNumber())
+        ).toEqual({
+            actionForUse: types.ADD,
+            prevAction: types.ADD,
+            prevSum: 55,
+            sum: 55,
+            entryBox: 55,
+            history: '55 +',
+            prevHistory: '55'
+        })
+    });
 });

@@ -26,9 +26,9 @@ export default class ButtonsComponents extends Component {
                 <button onClick={()=>{this.props.setEntryBox(3)}}>3</button>
                 <button className='invisible'>N</button>
 
-                <button id='zeroButton' value='0'>0</button>
-                <button value='.'>.</button>
-                <button id='equalButton' value='='>=</button>
+                <button id='zeroButton' onClick={()=>{this.props.setEntryBox(0)}}>0</button>
+                <button onClick={()=>{this.props.setEntryBox('.')}}>.</button>
+                <button id='equalButton' onClick={()=>{this.props.getResult()}}>=</button>
             </div>
         )
     }

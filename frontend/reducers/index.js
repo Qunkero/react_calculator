@@ -80,6 +80,14 @@ export default function (state = initialState, action) {
         case types.ALL_CLEAN:
             return initialState;
 
+        case types.GET_RESULT:
+            return {
+                ...initialState,
+                sum: state.sum,
+                entryBox: String(state.sum),
+                prevHistory: '' + state.sum
+            };
+
         default:
             return state
     }
