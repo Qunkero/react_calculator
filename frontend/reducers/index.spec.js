@@ -390,4 +390,110 @@ describe('calculator reducer test',() =>{
             prevHistory: '55'
         })
     });
+
+    it('test for multiply', ()=>{
+        expect(
+            reducer({
+                sum: 5,
+                actionForUse: '',
+                entryBox: '5',
+                history: '',
+                prevAction: types.SET_ENTRY_BOX,
+                prevHistory: '' // history + entryBox
+            }, action.multiplyNumber())
+        ).toEqual({
+            prevSum: 5,
+            sum: 5,
+            actionForUse: types.MULTIPLY,
+            entryBox: '5',
+            history: '5 *',
+            prevAction: types.MULTIPLY,
+            prevHistory: '5' // history + entryBox
+        });
+
+        expect(
+            reducer({
+                prevSum: 5,
+                sum: 5,
+                actionForUse: types.MULTIPLY,
+                entryBox: '5',
+                history: '5 *',
+                prevAction: types.MULTIPLY,
+                prevHistory: '5' // history + entryBox
+            }, action.setEntryBox(6))
+        ).toEqual({
+            prevSum: 5,
+            sum: 30,
+            actionForUse: types.MULTIPLY,
+            entryBox: '6',
+            history: '5 *',
+            prevAction: types.SET_ENTRY_BOX,
+            prevHistory: '5' // history + entryBox
+        });
+
+        expect(
+            reducer({
+                prevSum: 5,
+                sum: 30,
+                actionForUse: types.MULTIPLY,
+                entryBox: '6',
+                history: '5 *',
+                prevAction: types.SET_ENTRY_BOX,
+                prevHistory: '5' // history + entryBox
+            }, action.addNumber())
+        ).toEqual({
+            prevSum: 30,
+            sum: 30,
+            actionForUse: types.ADD,
+            entryBox: '30',
+            history: '5 * 6 +',
+            prevAction: types.ADD,
+            prevHistory: '5 * 6' // history + entryBox
+        });
+    });
+
+    it('clear entry box', ()=>{
+        expect(
+            reducer({
+                prevSum: 11,
+                sum: 11,
+                actionForUse: types.SUBTRACTION,
+                entryBox: '11',
+                history: '5 + 6 -',
+                prevAction: types.SUBTRACTION,
+                prevHistory: '5 + 6' // history + entryBox
+            }, action.clearEntry())
+        ).toEqual({
+            prevSum: 11,
+            sum: 11,
+            actionForUse: types.SUBTRACTION,
+            entryBox: 0,
+            history: '5 + 6 -',
+            prevAction: types.CLEAR_ENTRY,
+            prevHistory: '5 + 6' // history + entryBox
+        });
+    });
+
+    // it('twice pressing . .', ()=>{
+    //     expect(
+    //         reducer({
+    //             prevSum: 0,
+    //             sum: 5,
+    //             actionForUse: '',
+    //             entryBox: '5',
+    //             prevHistory: '',
+    //             history: '',
+    //             prevAction: types.SET_ENTRY_BOX
+    //         }, action.setEntryBox('.'))
+    //     ).toEqual({
+    //         prevSum: 0,
+    //         sum: 55,
+    //         actionForUse: '',
+    //         entryBox: '55',
+    //         prevHistory: '',
+    //         history: '',
+    //         prevAction: types.SET_ENTRY_BOX
+    //     });
+    // });
 });
+

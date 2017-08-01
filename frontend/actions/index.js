@@ -6,6 +6,7 @@ export const allClean  = () => ({ type: types.ALL_CLEAN});
 export const getResult  = () => ({ type: types.GET_RESULT});
 
 export const setEntryBox = (element)=> ({ type: types.SET_ENTRY_BOX, number: element });
+export const clearEntry = ()=> ({ type: types.CLEAR_ENTRY});
 
 
 

@@ -6,9 +6,9 @@ export default class ButtonsComponents extends Component {
         return (
             <div id="buttons">
                 <button className='red' onClick={()=>{this.props.allClean()}}>AC</button>
-                <button className='red' value='ce'>CE</button>
-                <button value='/'>&divide;</button>
-                <button value='*'>x</button>
+                <button className='red' onClick={()=>{this.props.clearEntry()}}>CE</button>
+                <button onClick={()=>{this.props.divisionNumber()}}>&divide;</button>
+                <button onClick={()=>{this.props.multiplyNumber()}}>x</button>
 
                 <button onClick={()=>{this.props.setEntryBox(7)}}>7</button>
                 <button onClick={()=>{this.props.setEntryBox(8)}}>8</button>
