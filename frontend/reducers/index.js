@@ -3,6 +3,7 @@ import * as types from '../constants/ActionTypes';
 const initialState = {
     prevAction: '',
     actionForUse: '',
+    prevSum: 0,
     sum: 0,
     entryBox: 0,
     history: '',
@@ -30,18 +31,6 @@ function computeSum(action, prevSum, entryBox) {
     }
 }
 
-function computeSumWhenSetEntryBoxTwice(entryBox, prevHistory) {
-    if (!prevHistory) {
-        return entryBox;
-    } else if(Number(prevHistory)) {
-        return entryBox + Number(prevHistory);
-    } else {
-        return prevHistory.split('').reduce((prev, item)=>{
-           return Number(item) ? Number(item) + prev : prev;
-        }, entryBox);
-    }
-}
-
 
 export default function (state = initialState, action) {
 
@@ -56,7 +45,7 @@ export default function (state = initialState, action) {
         case types.SET_ENTRY_BOX:
             const entryBox = addStringElement(state.entryBox, action.number, prevSetEntryBox),
                 sum = !state.actionForUse ? Number(entryBox) :
-                    prevSetEntryBox ? computeSumWhenSetEntryBoxTwice(Number(entryBox), state.prevHistory) :
+                    prevSetEntryBox ? computeSum(state.actionForUse, state.prevSum, Number(entryBox)) :
                         computeSum(state.actionForUse, state.sum, action.number);
             return {
                 ...state,
@@ -69,16 +58,18 @@ export default function (state = initialState, action) {
 
             return {
                 ...state,
+                prevSum: state.sum,
                 actionForUse: types.ADD,
                 entryBox: entryForState,
                 prevHistory: prevHistory,
-                history: prevSetEntryBox ? history + state.entryBox + " " + '+' : state.prevAction + " " + "+",
+                history: prevSetEntryBox ? history + state.entryBox + " " + '+' : state.prevHistory + " " + "+",
                 prevAction: types.ADD
             };
 
         case types.SUBTRACTION:
             return {
                 ...state,
+                prevSum: state.sum,
                 actionForUse: types.SUBTRACTION,
                 entryBox: entryForState,
                 prevHistory: prevHistory,
