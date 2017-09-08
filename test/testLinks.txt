@@ -1,5 +1,0 @@
-http://sinonjs.org/
-http://chaijs.com/api/bdd/
-https://habrahabr.ru/company/infowatch/blog/315760/
-https://habrahabr.ru/post/314978/
-http://mochajs.org/#interfaces

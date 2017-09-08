@@ -1,14 +1,5 @@
 import * as types from '../constants/ActionTypes';
-
-const initialState = {
-    prevAction: '',
-    actionForUse: '',
-    prevSum: 0,
-    sum: 0,
-    entryBox: 0,
-    history: '',
-    prevHistory: ''
-};
+import initialState from './initialState';
 
 
 function addStringElement(a, b, prevAction) {

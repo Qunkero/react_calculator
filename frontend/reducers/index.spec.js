@@ -1,16 +1,8 @@
 import reducer from './index';
 import * as action from '../actions'
 import * as types from '../constants/ActionTypes';
+import initialState from './initialState';
 
-const initialState = {
-    actionForUse: '',
-    prevAction: '',
-    prevSum: 0,
-    sum: 0,
-    entryBox: 0,
-    history: '',
-    prevHistory: ''
-};
 
 
 describe('calculator reducer test',() =>{
